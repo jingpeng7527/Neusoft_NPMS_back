@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.neusoft</groupId>
+    <artifactId>npms</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>eureka_server_15000</module>
+    </modules>
+
+    <packaging>pom</packaging>
+
+    <properties>
+        <springboot.version>2.3.3.RELEASE</springboot.version>
+        <springcloud.version>Hoxton.SR9</springcloud.version>
+    </properties>
+
+
+    <dependencyManagement>
+        <dependencies>
+            <!--boot 2.3.3 -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <!--                <version>2.3.3.RELEASE</version>-->
+                <version>${springboot.version}</version>
+                <type>pom</type>
+                <!-- Maven也是单继承。这里继承了spring-boot中的dependencyManagement
+                     但是下面还要继承spring-cloud中的dependencyManagement。
+                    使用scope=import就可以实现多继承了
+                -->
+                <scope>import</scope>
+            </dependency>
+
+            <!--cloud hoxton.sr9 -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <!--                <version>Hoxton.SR9</version>-->
+                <version>${springcloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>

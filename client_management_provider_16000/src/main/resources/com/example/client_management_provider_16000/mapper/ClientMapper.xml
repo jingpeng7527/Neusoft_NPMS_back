@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.client_management_provider_16000.mapper.ClientMapper">
+    <select id="queryClient" resultType="com.example.client_management_provider_16000.dto.QueryClient" parameterType="com.example.client_management_provider_16000.dto.QueryClientPara">
+        SELECT client.id as client_id,client_num,name as client_name,product_type,company_type_id,dept_id,user_id
+        from client join `user` on (client.user_id=`user`.id)
+        <where>
+            <if test="deptId!=null and deptId!=''">
+                and dept_id=#{deptId}
+            </if>
+            <if test="userId!=null and userId!=''">
+                and user_id=#{userId}
+            </if>
+            <if test="clientNum!=null and clientNum!=''">
+                and client_num like '%${clientNum}%'
+            </if>
+            <if test="clientName!=null and clientName!=''">
+                and name like '%${clientName}%'
+            </if>
+            <if test="companyTypeId!=null and companyTypeId!=''">
+                and company_type_id=#{companyTypeId}
+            </if>
+        </where>
+    </select>
+</mapper>

@@ -6,10 +6,9 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="client_management_provider_16000" />
         <module name="eureka_server_15000" />
-        <module name="sales_log_provider_server_12000" />
-        <module name="chance_consumer_server_13000" />
-        <module name="chance_provider_server_14000" />
+        <module name="client_management_consumer_17000" />
       </profile>
     </annotationProcessing>
   </component>

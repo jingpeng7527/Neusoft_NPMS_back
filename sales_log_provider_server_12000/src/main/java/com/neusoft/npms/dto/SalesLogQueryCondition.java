@@ -6,11 +6,13 @@ public class SalesLogQueryCondition {
     private String userid;
     private LocalDate startTime;
     private LocalDate endTime;
+    private String week;
 
-    public SalesLogQueryCondition(String userid, LocalDate startTime, LocalDate endTime) {
+    public SalesLogQueryCondition(String userid, LocalDate startTime, LocalDate endTime, String week) {
         this.userid = userid;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.week = week;
     }
 
     public String getUserid() {
@@ -37,12 +39,21 @@ public class SalesLogQueryCondition {
         this.endTime = endTime;
     }
 
+    public String getWeek() {
+        return week;
+    }
+
+    public void setWeek(String week) {
+        this.week = week;
+    }
+
     @Override
     public String toString() {
         return "SalesLogQueryCondition{" +
                 "userid='" + userid + '\'' +
                 ", startTime=" + startTime +
                 ", endTime=" + endTime +
+                ", week='" + week + '\'' +
                 '}';
     }
 }

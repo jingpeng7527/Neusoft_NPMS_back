@@ -15,5 +15,5 @@ import java.util.List;
  * @since 2021-07-13
  */
 public interface ISalesLogService extends IService<SalesLog> {
-    List<SalesLog> getByIdAndTime(String userid, LocalDate startTime, LocalDate endTime);
+    List<SalesLog> getByIdAndTime(String userid, LocalDate startTime, LocalDate endTime, String week);
 }

@@ -6,5 +6,8 @@
         select * from sales_log
         where user_id = #{userid}
         and log_date between #{startTime} and #{endTime}
+        <if test="week != null">
+            and week=#{week}
+        </if>
     </select>
 </mapper>

@@ -25,8 +25,8 @@ public class SalesLogServiceImpl extends ServiceImpl<SalesLogMapper, SalesLog> i
     @Autowired
     SalesLogMapper salesLogMapper;
 
-    public List<SalesLog> getByIdAndTime(String userid, LocalDate startTime, LocalDate endTime){
-        SalesLogQueryCondition queryCondition = new SalesLogQueryCondition(userid, startTime,endTime);
+    public List<SalesLog> getByIdAndTime(String userid, LocalDate startTime, LocalDate endTime, String week){
+        SalesLogQueryCondition queryCondition = new SalesLogQueryCondition(userid, startTime,endTime,week);
         List<SalesLog> list = salesLogMapper.getByIdAndTime(queryCondition);
         return list;
     }

@@ -4,24 +4,24 @@ import com.example.client_management_provider_16000.entity.Client;
 
 public class QueryClient {
 
-    private Integer clientId;
+    private Integer id;
     private String clientNum;
 //
 //    /**
 //     * 必填项，唯一
 //     */
-    private String clientName;
+    private String name;
     private Integer companyTypeId;
     private String productType;
     private Integer deptId;
     private Integer userId;
 
-    public Integer getClientId() {
-        return clientId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setClientId(Integer clientId) {
-        this.clientId = clientId;
+    public void setId(Integer clientId) {
+        this.id = clientId;
     }
 
     public String getClientNum() {
@@ -32,12 +32,12 @@ public class QueryClient {
         this.clientNum = clientNum;
     }
 
-    public String getClientName() {
-        return clientName;
+    public String getName() {
+        return name;
     }
 
-    public void setClientName(String clientName) {
-        this.clientName = clientName;
+    public void setName(String clientName) {
+        this.name = clientName;
     }
 
     public Integer getCompanyTypeId() {
@@ -75,9 +75,9 @@ public class QueryClient {
     @Override
     public String toString() {
         return "QueryClient{" +
-                "clientId=" + clientId +
+                "clientId=" + id +
                 ", clientNum='" + clientNum + '\'' +
-                ", clientName='" + clientName + '\'' +
+                ", clientName='" + name + '\'' +
                 ", companyTypeId=" + companyTypeId +
                 ", productType='" + productType + '\'' +
                 ", deptId=" + deptId +

@@ -5,14 +5,15 @@ import com.example.client_management_provider_16000.entity.ClientRelate;
 public class SaveClientRelate {
     private Integer clientCurrentId;
     private Integer clientRelateId;
-    private String clientRelateName;
     private Integer clientRelateTypeId;
+    private String clientRelateName;
 
-    public SaveClientRelate(ClientRelate clientRelate) {
-        this.clientCurrentId = clientRelate.getClientCurrentId();
-        this.clientRelateId = clientRelate.getClientRelateId();
-        this.clientRelateTypeId = clientRelate.getClientRelateTypeId();
-    }
+
+//    public SaveClientRelate(ClientRelate clientRelate) {
+//        this.clientCurrentId = clientRelate.getClientCurrentId();
+//        this.clientRelateId = clientRelate.getClientRelateId();
+//        this.clientRelateTypeId = clientRelate.getClientRelateTypeId();
+//    }
 
     @Override
     public String toString() {

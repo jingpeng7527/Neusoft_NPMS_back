@@ -34,6 +34,7 @@ class AlarmFilteringApplicationTests {
 //        p.setClientNum("80000");
 //        System.out.println(clientMapper.queryClient(p));
         ClientRelate clientRelate = new ClientRelate();
+//        clientRelate.setId(5);
         clientRelate.setClientRelateId(2);
         clientRelate.setClientCurrentId(1);
         clientRelate.setClientRelateTypeId(2);

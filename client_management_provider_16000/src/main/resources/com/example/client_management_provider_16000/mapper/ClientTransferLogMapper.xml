@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.client_management_provider_16000.mapper.ClientTransferLogMapper">
+    <select id="getTransferLog" resultType="com.example.client_management_provider_16000.dto.TransferLogWithChance" parameterType="com.example.client_management_provider_16000.dto.TransferLogPara">
+        select a.name as export_dept_name,c.username as export_user_name,b.name as import_dept_name,d.username as import_user_name,transfer_time,client_transfer_log.chance_num,
+        chance.name as chance_name,client_num,client.name as client_name from client_transfer_log,client,chance,dept a,dept b,user c,user d
+        where
+        client_transfer_log.client_id = client.id
+        and client_transfer_log.chance_num = chance.chance_num
+        and import_dept_id = b.id
+        and export_dept_id = a.id
+        and import_user_id = d.id
+        and export_user_id = c.id
+            <if test="exportDeptId!=null and exportDeptId!=''">
+                and export_dept_id=#{exportDeptId}
+            </if>
+            <if test="exportUserId!=null and exportUserId!=''">
+                and export_user_id=#{exportUserId}
+            </if>
+            <if test="importDeptId!=null and importDeptId!=''">
+                and import_dept_id=#{importDeptId}
+            </if>
+            <if test="importUserId!=null and importUserId!=''">
+                and import_user_id =#{importUserId}
+            </if>
+            <if test="clientName!=null and clientName!=''">
+                and client.name like '%${clientName}%'
+            </if>
+            <if test="chanceName!=null and chanceName!=''">
+                and chance.name like '%${chanceName}%'
+            </if>
+    </select>
+</mapper>

@@ -18,5 +18,5 @@ import java.util.List;
  */
 public interface IClientService extends IService<Client> {
     List<QueryClient> queryClient(QueryClientPara queryClientPara);
-//    List<QueryClient> queryClient(String client_name, String client_num, Integer company_type_id, Integer dept_id, Integer user_id);
+    Integer updateClientUser(Integer client_id, Integer dept_id, Integer user_id);
     }

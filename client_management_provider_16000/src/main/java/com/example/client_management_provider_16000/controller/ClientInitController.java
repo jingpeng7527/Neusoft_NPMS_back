@@ -33,7 +33,14 @@ public class ClientInitController {
     @Autowired
     UserServiceImpl userService;
 
+
     //初始化
+
+    @GetMapping("init_user")
+    public List<User> initUser(){
+        return userService.list();
+    }
+
     @GetMapping("/init_company_type")
     public List<CompanyType> initCompangType(){
         return companyTypeService.list();

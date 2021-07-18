@@ -2,7 +2,6 @@ package com.example.login_server_18000.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.example.client_management_provider_16000.dto.RespBean;
 import com.example.login_server_18000.entity.User;
 import com.example.login_server_18000.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;

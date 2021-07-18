@@ -1,10 +1,7 @@
 package com.example.login_server_18000.config;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.example.client_management_provider_16000.dto.RespBean;
-import com.example.client_management_provider_16000.entity.Client;
+
+import com.example.login_server_18000.dto.RespBean;
 import com.example.login_server_18000.entity.User;
 import com.example.login_server_18000.service.IUserService;
 import com.example.login_server_18000.service.impl.UserServiceImpl;

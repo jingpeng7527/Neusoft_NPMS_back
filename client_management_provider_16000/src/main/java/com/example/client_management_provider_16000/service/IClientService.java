@@ -19,4 +19,6 @@ import java.util.List;
 public interface IClientService extends IService<Client> {
     List<QueryClient> queryClient(QueryClientPara queryClientPara);
     Integer updateClientUser(Integer client_id, Integer dept_id, Integer user_id);
+    Integer updateClientInChanceDraft(Client client);
+    Integer updateClientInChance(Client client);
     }

@@ -1,6 +1,7 @@
 package com.example.login_server_18000.config;
 
-import com.example.client_management_provider_16000.dto.RespBean;
+
+import com.example.login_server_18000.dto.RespBean;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.AuthenticationException;

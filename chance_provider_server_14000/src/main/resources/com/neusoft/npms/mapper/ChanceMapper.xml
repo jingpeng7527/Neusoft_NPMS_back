@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neusoft.npms.mapper.ChanceMapper">
+
+
+<!--    private String chanceNum;
+    private String name;
+    private String deptId;
+    private String userId;
+    private String presignDateBegin;
+    private String presignDateEnd;
+    private String chanceStageId;
+    private String productNum;
+    private String chanceTypeNum;
+    private String chanceStatusId;-->
+
+    <select id="getChanceByCondition" parameterType="com.neusoft.npms.dto.ChanceQueryCondition" resultType="com.neusoft.npms.entity.Chance">
+        select * from chance
+        <trim prefix="where" suffixOverrides="and">
+            <if test="chanceNum != null and chanceNum !=''">
+                chance_num like '%${chanceNum}%' and
+            </if>
+            <if test="name != null and name !=''">
+                name like '%${name}%' and
+            </if>
+            <if test="deptId != null and deptId != ''">
+                dept_id = #{deptId} and
+            </if>
+            <if test="userId != null and userId != ''">
+                user_id = #{userId} and
+            </if>
+            <if test="presignDateBegin != null and presignDateEnd != null">
+                presign_date between #{presignDateBegin} and #{presignDateEnd} and
+            </if>
+            <if test="chanceStageId != null and chanceStageId != ''">
+                chance_stage_id = #{chanceStageId} and
+            </if>
+            <if test="chanceStatusId != null and chanceStatusId != ''">
+                chance_status_id = #{chanceStatusId} and
+            </if>
+
+        </trim>
+    </select>
+
+    <select id="getChanceWithChanceTypeAndProductNum" parameterType="ChanceQueryCondition" resultType="Chance">
+        select distinct chance.id, chance.chance_num, chance.name,chance.client_name,chance.chance_source_id,chance.chance_stage_id,chance.presign_date,old,chance.dept_id,chance.background,chance.user_id, chance.create_date,chance.chance_status_id,chance.client_id,
+        chance_type_product.id as chance_type_product_id,chance_type_product.chance_type_num as chance_type_product_chance_type_num,chance_type_product.product_num as chance_type_product_product_num,
+        sub_chance.chance_num as sub_chance_chance_num,sub_chance.chance_type_product_id as sub_chance_chance_type_product_id
+        from chance,chance_type_product,sub_chance
+
+        <trim suffixOverrides="and">
+            where sub_chance.chance_type_product_id = chance_type_product.id and chance.chance_num = sub_chance.chance_num and
+            <if test="chanceNum != null and chanceNum !=''">
+                chance.chance_num like '%${chanceNum}%' and
+            </if>
+            <if test="name != null and name !=''">
+                chance.name like '%${name}%' and
+            </if>
+            <if test="deptId != null and deptId != ''">
+                chance.dept_id = #{deptId} and
+            </if>
+            <if test="userId != null and userId != ''">
+                chance.user_id = #{userId} and
+            </if>
+            <if test="presignDateBegin != null and presignDateEnd != null">
+                presign_date between #{presignDateBegin} and #{presignDateEnd} and
+            </if>
+            <if test="chanceStageId != null and chanceStageId != ''">
+                chance_stage_id = #{chanceStageId} and
+            </if>
+            <if test="chanceStatusId != null and chanceStatusId != ''">
+                chance_status_id = #{chanceStatusId} and
+            </if>
+            <if test="productNum != null and productNum != ''">
+                chance_type_product.product_num = #{productNum} and
+            </if>
+            <if test="chanceTypeNum != null and chanceTypeNum != ''">
+                chance_type_product.chance_type_num = #{chanceTypeNum} and
+            </if>
+        </trim>
+    </select>
+
+
+</mapper>

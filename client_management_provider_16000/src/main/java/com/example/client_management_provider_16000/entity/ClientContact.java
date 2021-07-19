@@ -48,6 +48,15 @@ public class ClientContact implements Serializable {
 
     private String wechat;
 
+    private String status;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public Integer getId() {
         return id;
@@ -140,17 +149,18 @@ public class ClientContact implements Serializable {
     @Override
     public String toString() {
         return "ClientContact{" +
-        "id=" + id +
-        ", clientId=" + clientId +
-        ", name=" + name +
-        ", dept=" + dept +
-        ", position=" + position +
-        ", tel=" + tel +
-        ", phone=" + phone +
-        ", fax=" + fax +
-        ", mail=" + mail +
-        ", qq=" + qq +
-        ", wechat=" + wechat +
-        "}";
+                "id=" + id +
+                ", clientId=" + clientId +
+                ", name='" + name + '\'' +
+                ", dept='" + dept + '\'' +
+                ", position='" + position + '\'' +
+                ", tel='" + tel + '\'' +
+                ", phone='" + phone + '\'' +
+                ", fax='" + fax + '\'' +
+                ", mail='" + mail + '\'' +
+                ", qq='" + qq + '\'' +
+                ", wechat='" + wechat + '\'' +
+                ", status='" + status + '\'' +
+                '}';
     }
 }

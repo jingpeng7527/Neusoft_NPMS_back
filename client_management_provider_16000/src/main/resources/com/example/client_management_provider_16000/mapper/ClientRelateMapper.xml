@@ -2,11 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.client_management_provider_16000.mapper.ClientRelateMapper">
     <select id="getSaveRelate" resultType="com.example.client_management_provider_16000.dto.SaveClientRelate" parameterType="com.example.client_management_provider_16000.entity.ClientRelate">
-        SELECT client_current_id,client_relate_id,client_relate_type_id,name from client_relate,client
+        SELECT client_relate.id,client_current_id,client_relate_id,client_relate_type_id,client.name as client_relate_name, client_relate_type.name as client_relate_type_name from client_relate,client,client_relate_type
             where
-            #{clientRelateId} = client_relate_id and
-            #{ClientCurrentId} = client_current_id and
-            client_relate_type_id = #{clientRelateTypeId} and
-                client_relate_id = client.id
+                client_relate_id = #{clientRelateId}  and
+                client_current_id= #{clientCurrentId} and
+                client_relate_type_id = #{clientRelateTypeId} and
+                client_relate_id = client.id and
+                  client_relate_type_id = client_relate_type.id
     </select>
 </mapper>

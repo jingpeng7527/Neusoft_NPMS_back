@@ -3,25 +3,47 @@ package com.example.client_management_provider_16000.dto;
 import com.example.client_management_provider_16000.entity.ClientRelate;
 
 public class SaveClientRelate {
+    private Integer id;
     private Integer clientCurrentId;
     private Integer clientRelateId;
-    private String clientRelateName;
     private Integer clientRelateTypeId;
+    private String clientRelateName;
+    private String clientRelateTypeName;
 
-    public SaveClientRelate(ClientRelate clientRelate) {
-        this.clientCurrentId = clientRelate.getClientCurrentId();
-        this.clientRelateId = clientRelate.getClientRelateId();
-        this.clientRelateTypeId = clientRelate.getClientRelateTypeId();
-    }
+
+//    public SaveClientRelate(ClientRelate clientRelate) {
+//        this.clientCurrentId = clientRelate.getClientCurrentId();
+//        this.clientRelateId = clientRelate.getClientRelateId();
+//        this.clientRelateTypeId = clientRelate.getClientRelateTypeId();
+//    }
+
 
     @Override
     public String toString() {
         return "SaveClientRelate{" +
-                "clientCurrentId=" + clientCurrentId +
+                "id=" + id +
+                ", clientCurrentId=" + clientCurrentId +
                 ", clientRelateId=" + clientRelateId +
-                ", clientRelateName='" + clientRelateName + '\'' +
                 ", clientRelateTypeId=" + clientRelateTypeId +
+                ", clientRelateName='" + clientRelateName + '\'' +
+                ", clientRelateTypeName='" + clientRelateTypeName + '\'' +
                 '}';
+    }
+
+    public String getClientRelateTypeName() {
+        return clientRelateTypeName;
+    }
+
+    public void setClientRelateTypeName(String clientRelateTypeName) {
+        this.clientRelateTypeName = clientRelateTypeName;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Integer getClientCurrentId() {

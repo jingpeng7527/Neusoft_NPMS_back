@@ -20,4 +20,5 @@ import java.util.List;
 @Repository("ClientMapper")
 public interface ClientMapper extends BaseMapper<Client> {
     List<QueryClient> queryClient(QueryClientPara queryClientPara);
+//    List<>
 }

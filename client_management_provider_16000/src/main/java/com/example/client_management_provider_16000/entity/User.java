@@ -10,7 +10,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author abigail
- * @since 2021-07-13
+ * @since 2021-07-16
  */
 public class User implements Serializable {
 
@@ -29,6 +29,8 @@ public class User implements Serializable {
     private Integer deptId;
 
     private String userNum;
+
+    private Integer roleId;
 
 
     public Integer getId() {
@@ -71,6 +73,14 @@ public class User implements Serializable {
         this.userNum = userNum;
     }
 
+    public Integer getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -79,6 +89,7 @@ public class User implements Serializable {
         ", password=" + password +
         ", deptId=" + deptId +
         ", userNum=" + userNum +
+        ", roleId=" + roleId +
         "}";
     }
 }

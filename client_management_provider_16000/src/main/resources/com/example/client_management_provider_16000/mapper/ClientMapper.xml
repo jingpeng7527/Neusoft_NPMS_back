@@ -2,9 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.client_management_provider_16000.mapper.ClientMapper">
     <select id="queryClient" resultType="com.example.client_management_provider_16000.dto.QueryClient" parameterType="com.example.client_management_provider_16000.dto.QueryClientPara">
-        SELECT client.id as client_id,client_num,name as client_name,product_type,company_type_id,dept_id,user_id
-        from client join `user` on (client.user_id=`user`.id)
+        SELECT client.*,company_type.name as company_type_name,dept_id,dept.name as dept_name,username as user_name, client.name as client_name
+        from client left join user on (client.user_id=user.id),company_type,dept
         <where>
+            company_type_id = company_type.id and
+            dept_id = dept.id
             <if test="deptId!=null and deptId!=''">
                 and dept_id=#{deptId}
             </if>
@@ -15,7 +17,7 @@
                 and client_num like '%${clientNum}%'
             </if>
             <if test="clientName!=null and clientName!=''">
-                and name like '%${clientName}%'
+                and client.name like '%${clientName}%'
             </if>
             <if test="companyTypeId!=null and companyTypeId!=''">
                 and company_type_id=#{companyTypeId}

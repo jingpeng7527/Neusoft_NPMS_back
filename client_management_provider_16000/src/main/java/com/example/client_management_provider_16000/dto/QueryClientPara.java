@@ -8,14 +8,14 @@ public class QueryClientPara {
 //    /**
 //     * 必填项，唯一
 //     */
-    private String clientName;
+    private String name;
     private Integer companyTypeId;
     private Integer deptId;
     private Integer userId;
 
     public QueryClientPara(String clientNum, String clientName, Integer companyTypeId, Integer deptId, Integer userId) {
         this.clientNum = clientNum;
-        this.clientName = clientName;
+        this.name = clientName;
         this.companyTypeId = companyTypeId;
         this.deptId = deptId;
         this.userId = userId;
@@ -34,11 +34,11 @@ public class QueryClientPara {
     }
 
     public String getClientName() {
-        return clientName;
+        return name;
     }
 
     public void setClientName(String clientName) {
-        this.clientName = clientName;
+        this.name = clientName;
     }
 
     public Integer getCompanyTypeId() {
@@ -69,7 +69,7 @@ public class QueryClientPara {
     public String toString() {
         return "QueryClientPara{" +
                 "clientNum='" + clientNum + '\'' +
-                ", clientName='" + clientName + '\'' +
+                ", name='" + name + '\'' +
                 ", companyTypeId=" + companyTypeId +
                 ", deptId=" + deptId +
                 ", userId=" + userId +

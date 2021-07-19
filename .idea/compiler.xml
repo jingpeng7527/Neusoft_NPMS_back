@@ -7,9 +7,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="client_management_provider_16000" />
-        <module name="eureka_server_15000" />
+        <module name="login_server_18000" />
         <module name="client_management_consumer_17000" />
+        <module name="sales_log_provider_server_12000" />
+        <module name="eureka_server_15000" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel target="15" />
   </component>
 </project>

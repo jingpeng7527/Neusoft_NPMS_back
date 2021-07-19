@@ -31,7 +31,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //        .antMatchers(HttpMethod.POST,"/users/user/admin/**").hasRole("ADMIN")
 
                 .antMatchers(
-                        HttpMethod.GET,
+                        HttpMethod.POST,
                         "/**/*.html",
                         "/**/*.css",
                         "/",

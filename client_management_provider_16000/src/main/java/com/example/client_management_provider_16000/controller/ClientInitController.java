@@ -7,6 +7,7 @@ import com.example.client_management_provider_16000.dto.RespBean;
 import com.example.client_management_provider_16000.entity.*;
 import com.example.client_management_provider_16000.service.impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,11 +37,13 @@ public class ClientInitController {
 
     //初始化
 
+    @Cacheable(cacheNames = "initUser")
     @GetMapping("init_user")
     public List<User> initUser(){
         return userService.list();
     }
 
+    @Cacheable(cacheNames = "initCompanyType")
     @GetMapping("/init_company_type")
     public List<CompanyType> initCompangType(){
         return companyTypeService.list();
@@ -49,16 +52,19 @@ public class ClientInitController {
 //    @RequestParam(value = "userId") Integer userId,@RequestParam(value = "userRole") Integer UserRole
     //1客户经理，34销售总监、事业部总经理，2营销副总，0高级领导（数据库里没有）
 
+    @Cacheable(cacheNames = "initTaxType")
     @GetMapping("init_tax_type")
     public List<TaxType> initTaxType(){
         return taxTypeService.list();
     }
 
+    @Cacheable(cacheNames = "initAccountGroup")
     @GetMapping("init_account_group")
     public List<AccountGroup> initAccountType(){
         return accountGroupService.list();
     }
 
+    @Cacheable(cacheNames = "initClientRelateType")
     @GetMapping("init_client_relate_type")
     public List<ClientRelateType> initClientRelateType(){
         return clientRelateTypeService.list();

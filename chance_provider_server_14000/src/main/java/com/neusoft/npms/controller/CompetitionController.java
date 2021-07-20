@@ -21,6 +21,7 @@ import java.util.List;
  * @author yky
  * @since 2021-07-15
  */
+@CrossOrigin
 @RestController
 @RequestMapping("/npms/competition")
 public class CompetitionController {

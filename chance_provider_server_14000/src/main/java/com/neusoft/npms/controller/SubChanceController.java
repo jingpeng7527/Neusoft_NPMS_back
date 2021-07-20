@@ -2,13 +2,13 @@ package com.neusoft.npms.controller;
 
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.baomidou.mybatisplus.extension.api.R;
 import com.neusoft.npms.dto.RespBean;
 import com.neusoft.npms.dto.ReturnSubChance;
 import com.neusoft.npms.entity.SubChance;
 import com.neusoft.npms.entity.SubChanceDraft;
 import com.neusoft.npms.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -27,6 +27,7 @@ import java.util.Set;
  * @author yky
  * @since 2021-07-13
  */
+@CrossOrigin
 @RestController
 @RequestMapping("/npms/sub-chance")
 public class SubChanceController {

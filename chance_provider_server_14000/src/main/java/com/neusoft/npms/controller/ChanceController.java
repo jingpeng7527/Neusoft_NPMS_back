@@ -9,6 +9,7 @@ import com.neusoft.npms.entity.ChanceDraft;
 import com.neusoft.npms.entity.Dept;
 import com.neusoft.npms.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ import java.util.List;
  * @author yky
  * @since 2021-07-13
  */
+@CrossOrigin
 @RestController
 @RequestMapping("/npms/chance")
 public class ChanceController {
@@ -46,6 +48,7 @@ public class ChanceController {
     @Autowired
     IChanceStageService iChanceStageService;
 
+    @Cacheable(cacheNames = "getDepartments")
     @GetMapping("/get_departments")
     public RespBean getDepartments(String user_id, String role_id){
         System.out.println("/get_departments: user_id:"+ user_id+" role_id:"+role_id);
@@ -152,6 +155,10 @@ public class ChanceController {
 
     @PostMapping("/modify_chance_basic_info")
     public RespBean modifyChanceBasicInfo(@RequestBody Chance chance) {
+        System.out.println("/modify_chance_basic_info");
+        System.out.println("chance: "+chance);
+        System.out.println();
+
         if (chance == null || chance.getChanceNum() == null || chance.getChanceNum().equals("") ||
                 chance.getName() == null || chance.getName().equals("") ||
                 chance.getChanceSourceId() == null || chance.getChanceSourceId() == 0 ||

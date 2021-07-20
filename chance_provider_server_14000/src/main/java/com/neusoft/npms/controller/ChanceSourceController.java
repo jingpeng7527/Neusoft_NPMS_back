@@ -5,6 +5,7 @@ import com.neusoft.npms.dto.RespBean;
 import com.neusoft.npms.entity.ChanceSource;
 import com.neusoft.npms.service.IChanceSourceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -20,6 +21,7 @@ import java.util.List;
  * @author yky
  * @since 2021-07-13
  */
+@CrossOrigin
 @RestController
 @RequestMapping("/npms/chance-source")
 public class ChanceSourceController {

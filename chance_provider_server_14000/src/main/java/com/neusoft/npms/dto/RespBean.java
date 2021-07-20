@@ -1,6 +1,8 @@
 package com.neusoft.npms.dto;
 
-public class RespBean {
+import java.io.Serializable;
+
+public class RespBean implements Serializable {
     //创建 正确消息提示 信息 不包括 封装的实体bean 例如用户信息
     public static RespBean ok(Integer status ,String msg ) {
         return new RespBean(status,msg,null);

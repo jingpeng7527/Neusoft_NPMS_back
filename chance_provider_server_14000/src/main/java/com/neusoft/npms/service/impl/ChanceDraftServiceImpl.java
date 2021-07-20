@@ -68,7 +68,7 @@ public class ChanceDraftServiceImpl extends ServiceImpl<ChanceDraftMapper, Chanc
 
     public boolean approve(ApproveChanceDraft approveChanceDraft,int role){ // 通过状态为 1
         // 生成审批日志
-        generateChanceApproveLog(approveChanceDraft);
+        generateChanceApproveLog(approveChanceDraft,role);
 
         // 修改状态
         if (role == 2) {// 审批人 role 营销副总
@@ -124,7 +124,7 @@ public class ChanceDraftServiceImpl extends ServiceImpl<ChanceDraftMapper, Chanc
 
     public boolean back(ApproveChanceDraft approveChanceDraft,int role) { // 驳回
         // 生成审批日志
-        generateChanceApproveLog(approveChanceDraft);
+        generateChanceApproveLog(approveChanceDraft,role);
 
         if (role == 2) { // 营销副总 驳回
 
@@ -144,7 +144,7 @@ public class ChanceDraftServiceImpl extends ServiceImpl<ChanceDraftMapper, Chanc
     }
 
     public boolean close(ApproveChanceDraft approveChanceDraft,int role){
-        generateChanceApproveLog(approveChanceDraft);
+        generateChanceApproveLog(approveChanceDraft,role);
         int chanceStatus = getOne(Wrappers.<ChanceDraft>lambdaQuery()
                 .eq(ChanceDraft::getChanceNum,approveChanceDraft.getChanceNum())).getChanceStatusId();
         // 拒绝修改触发的审批
@@ -178,7 +178,9 @@ public class ChanceDraftServiceImpl extends ServiceImpl<ChanceDraftMapper, Chanc
         }
     }
 
-    private void generateChanceApproveLog(ApproveChanceDraft approveChanceDraft) {
+    private void generateChanceApproveLog(ApproveChanceDraft approveChanceDraft, int role) {
+        ChanceDraft chanceDraft = getOne(Wrappers.<ChanceDraft>lambdaQuery().eq(ChanceDraft::getChanceNum,approveChanceDraft.getChanceNum()));
+        int chanceStatus = chanceDraft.getChanceStatusId();
         // 新建审批日志
         ChanceApproveLog chanceApproveLog = new ChanceApproveLog();
         chanceApproveLog.setApproveTime(LocalDateTime.now());
@@ -189,6 +191,16 @@ public class ChanceDraftServiceImpl extends ServiceImpl<ChanceDraftMapper, Chanc
                 .eq(ChanceDraft::getChanceNum,approveChanceDraft.getChanceNum())).getName());
         chanceApproveLog.setOpinionTypeId(Integer.parseInt(approveChanceDraft.getOpinionTypeId()));
         chanceApproveLog.setUserId(Integer.parseInt(approveChanceDraft.getUserId()));
+
+        if (chanceStatus == 6 || chanceStatus == 9)
+            chanceApproveLog.setChanceApproveState("Submit to Vice Marketing President");
+        else if (chanceStatus == 7 || chanceStatus == 8 || chanceStatus == 10) {
+            if (role == 4) {
+                chanceApproveLog.setChanceApproveState("Submit to General Manager of Business Department");
+            } else {
+                chanceApproveLog.setChanceApproveState("Submit to Sales Director");
+            }
+        }
         iChanceApproveLogService.save(chanceApproveLog);
     }
 

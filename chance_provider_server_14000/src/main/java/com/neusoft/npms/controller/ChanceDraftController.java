@@ -24,6 +24,7 @@ import java.util.List;
  * @author yky
  * @since 2021-07-13
  */
+@CrossOrigin
 @RestController
 @RequestMapping("/npms/chance-draft")
 public class ChanceDraftController {

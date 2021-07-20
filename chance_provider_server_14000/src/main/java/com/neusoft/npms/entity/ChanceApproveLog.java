@@ -50,6 +50,18 @@ public class ChanceApproveLog implements Serializable {
      */
     private String name;
 
+    /**
+     * 审批状态
+     */
+    private String chanceApproveState;
+
+    public String getChanceApproveState() {
+        return chanceApproveState;
+    }
+
+    public void setChanceApproveState(String chanceApproveState) {
+        this.chanceApproveState = chanceApproveState;
+    }
 
     public Integer getId() {
         return id;

@@ -8,11 +8,7 @@ import com.neusoft.npms.entity.SubChanceDraft;
 import com.neusoft.npms.service.ISubChanceDraftService;
 import com.neusoft.npms.service.ISubChanceService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,6 +20,7 @@ import java.util.List;
  * @author yky
  * @since 2021-07-13
  */
+@CrossOrigin
 @RestController
 @RequestMapping("/npms/sub-chance-draft")
 public class SubChanceDraftController {

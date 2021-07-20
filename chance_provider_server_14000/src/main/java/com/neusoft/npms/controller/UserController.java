@@ -6,6 +6,8 @@ import com.neusoft.npms.dto.RespBean;
 import com.neusoft.npms.entity.User;
 import com.neusoft.npms.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -21,12 +23,14 @@ import java.util.List;
  * @author yky
  * @since 2021-07-16
  */
+@CrossOrigin
 @RestController
 @RequestMapping("/npms/user")
 public class UserController {
     @Autowired
     IUserService iUserService;
 
+    @Cacheable(cacheNames = "getUserByDeptId")
     @GetMapping("/get_user_by_dept_id")
     public RespBean getUserByDeptId(String dept_id, String user_id, String role_id){
         System.out.println("/get_user_by_dept_id: dept_id:"+dept_id+

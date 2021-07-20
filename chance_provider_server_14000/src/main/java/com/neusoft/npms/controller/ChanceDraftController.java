@@ -69,7 +69,7 @@ public class ChanceDraftController {
             } else {
                 System.out.println("不为空"+chance.getChanceNum());
                 chance.setClientName(iClientService.getById(chance.getClientId()).getName());
-                iChanceDraftService.update(new ChanceDraft(chance),Wrappers.<ChanceDraft>lambdaUpdate().eq(ChanceDraft::getChanceNum,chance.getChanceNum()));
+                iChanceDraftService.saveOrUpdate(new ChanceDraft(chance),Wrappers.<ChanceDraft>lambdaUpdate().eq(ChanceDraft::getChanceNum,chance.getChanceNum()));
             }
             return RespBean.ok(200,"保存为草稿",chance);
         } catch (Exception e){
@@ -225,6 +225,40 @@ public class ChanceDraftController {
         } else {
             return RespBean.error(403,"没有权限进行该操作");
         }
+    }
+
+    // 1 新增 2 修改不审批 3 修改审批
+    @GetMapping("/submit")
+    public RespBean submit (String chanceNum, String isProcess){
+        System.out.println("/submit");
+        System.out.println("chanceNum: "+ chanceNum + "isProcess: "+ isProcess);
+        System.out.println();
+
+        if (chanceNum == null || chanceNum.equals("") || isProcess == null || isProcess.equals(""))
+            return RespBean.error(400,"非法参数");
+
+        boolean updateChanceBaiscInfo;
+        boolean updateSubChance;
+
+        if (isProcess.equals("1")) {
+            // 修改机会基本信息的状态为 新增流程中 6
+            updateChanceBaiscInfo = iChanceDraftService.update(Wrappers.<ChanceDraft>lambdaUpdate().eq(ChanceDraft::getChanceNum,chanceNum).set(ChanceDraft::getChanceStatusId,6));
+            updateSubChance = iSubChanceDraftService.update(Wrappers.<SubChanceDraft>lambdaUpdate().eq(SubChanceDraft::getChanceNum,chanceNum).set(SubChanceDraft::getSubChanceStatusId,5));
+            if (updateChanceBaiscInfo && updateSubChance)
+                return RespBean.ok(200,"提交成功");
+            else return RespBean.error(500,"未知错误，快库");
+        } else if (isProcess.equals("2")) {
+            return RespBean.error(403,"无权访问");
+        } else if (isProcess.equals("3")) {
+            updateChanceBaiscInfo = iChanceDraftService.update(Wrappers.<ChanceDraft>lambdaUpdate().eq(ChanceDraft::getChanceNum,chanceNum).set(ChanceDraft::getChanceStatusId,8));
+            updateSubChance = iSubChanceDraftService.update(Wrappers.<SubChanceDraft>lambdaUpdate().eq(SubChanceDraft::getChanceNum,chanceNum).set(SubChanceDraft::getSubChanceStatusId,5));
+            if (updateChanceBaiscInfo && updateSubChance)
+                return RespBean.ok(200,"提交成功");
+            else return RespBean.error(500,"未知错误，快库");
+        } else
+            return RespBean.error(400,"非法参数");
+
+
     }
 }
 

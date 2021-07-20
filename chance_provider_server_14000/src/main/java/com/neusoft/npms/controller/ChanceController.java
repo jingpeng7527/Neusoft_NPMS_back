@@ -72,7 +72,7 @@ public class ChanceController {
     // role 1 客户经理
     // role 3 销售总监
     @PostMapping("/query_chance_basic_info")
-    public RespBean queryCanceBasicInfo(@RequestBody ChanceQueryCondition chanceQueryCondition){
+    public RespBean queryChanceBasicInfo(@RequestBody ChanceQueryCondition chanceQueryCondition){
         System.out.println("/query_chance_basic_info");
         System.out.println("chanceQueryCondition:"+chanceQueryCondition);
         System.out.println();
@@ -148,6 +148,29 @@ public class ChanceController {
                     iDeptService, iUserService, iChanceStatusService));
         }
         return RespBean.ok(200,"没找到");
+    }
+
+    @PostMapping("/modify_chance_basic_info")
+    public RespBean modifyChanceBasicInfo(@RequestBody Chance chance) {
+        if (chance == null || chance.getChanceNum() == null || chance.getChanceNum().equals("") ||
+                chance.getName() == null || chance.getName().equals("") ||
+                chance.getChanceSourceId() == null || chance.getChanceSourceId() == 0 ||
+                chance.getChanceStageId() == null || chance.getChanceStageId() == 0 ||
+                chance.getPresignDate() == null || chance.getDeptId() == null || chance.getDeptId() == 0||
+                chance.getBackground() == null || chance.getBackground().equals("") ||
+                chance.getUserId() == null || chance.getUserId() == 0 ||
+                chance.getClientId() == null || chance.getClientId() == 0 ||
+                chance.getClientName() == null || chance.getClientName().equals("")){
+            return RespBean.error(400,"非法参数");
+        }
+        Chance isHere = iChanceService.getOne(Wrappers.<Chance>lambdaQuery()
+                .eq(Chance::getChanceNum,chance.getChanceNum()));
+
+        if (isHere == null)
+            return RespBean.error(400,"非法参数");
+        iChanceService.update(chance,Wrappers.<Chance>lambdaUpdate().eq(Chance::getChanceNum,chance.getChanceNum()));
+
+        return RespBean.ok(200,"更新成功");
     }
 
 }

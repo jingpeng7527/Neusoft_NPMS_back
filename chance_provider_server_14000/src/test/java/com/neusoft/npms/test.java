@@ -162,6 +162,11 @@ public class test {
     }
 
     @Test
+    void test12(){
+        System.out.println(iChanceDraftService.update(Wrappers.<ChanceDraft>lambdaUpdate().eq(ChanceDraft::getChanceNum,"20210006").set(ChanceDraft::getChanceStatusId,6)));
+    }
+
+    @Test
     void test11(){
         List<ChanceDraft> result = iChanceDraftService.list(Wrappers.<ChanceDraft>lambdaQuery()
                 .lt(ChanceDraft::getDeptId,9).and(draftQueryWrapper->draftQueryWrapper.eq(ChanceDraft::getChanceStatusId,7).or().eq(ChanceDraft::getChanceStatusId,10).or().eq(ChanceDraft::getChanceStatusId,8)));

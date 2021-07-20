@@ -1,0 +1,23 @@
+server:
+  port: 9401
+spring:
+  profiles:
+    active: dev
+  application:
+    name: micro-oauth2-auth
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 8.140.46.173:8848
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+  redis:
+    database: 0
+    port: 6666
+    host: 39.106.82.211
+    password: 8461e2c92b2848975c058cb4fbba735f
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

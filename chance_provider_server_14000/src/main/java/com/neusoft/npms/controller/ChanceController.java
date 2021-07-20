@@ -167,7 +167,8 @@ public class ChanceController {
                 chance.getBackground() == null || chance.getBackground().equals("") ||
                 chance.getUserId() == null || chance.getUserId() == 0 ||
                 chance.getClientId() == null || chance.getClientId() == 0 ||
-                chance.getClientName() == null || chance.getClientName().equals("")){
+                chance.getClientName() == null || chance.getClientName().equals("") ||
+                chance.getCreateDate() == null){
             return RespBean.error(400,"非法参数");
         }
         Chance isHere = iChanceService.getOne(Wrappers.<Chance>lambdaQuery()

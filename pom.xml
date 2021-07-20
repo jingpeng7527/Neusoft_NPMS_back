@@ -12,6 +12,8 @@
         <module>client_management_consumer_17000</module>
         <module>client_management_provider_16000</module>
         <module>sales_log_provider_server_12000</module>
+        <module>login_server_18000</module>
+        <module>chance_trace_log_management_19000</module>
         <module>chance_provider_server_14000</module>
     </modules>
 

@@ -8,15 +8,14 @@ import com.example.client_management_provider_16000.entity.*;
 import com.example.client_management_provider_16000.service.impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@CrossOrigin
 @RestController
+@EnableDiscoveryClient
 @RequestMapping("/client")
 public class ClientInitController {
     @Autowired

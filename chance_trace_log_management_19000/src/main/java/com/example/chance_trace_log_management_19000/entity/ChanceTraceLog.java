@@ -140,7 +140,7 @@ public class ChanceTraceLog implements Serializable {
         return communicationCondition;
     }
 
-    public void setCommunicationCondition(String condition) {
+    public void setCommunicationCondition(String communicationCondition) {
         this.communicationCondition = communicationCondition;
     }
 

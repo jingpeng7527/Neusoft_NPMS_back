@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.swing.text.ChangedCharSetException;
+import java.util.List;
 
 /**
  * <p>
@@ -19,6 +20,7 @@ import javax.swing.text.ChangedCharSetException;
  * @author abigail
  * @since 2021-07-19
  */
+@CrossOrigin
 @RestController
 @RequestMapping("/chance/chance_trace_log")
 public class ChanceTraceLogController {
@@ -29,7 +31,7 @@ public class ChanceTraceLogController {
     @PostMapping("/create")
     public RespBean createChanceTraceLog(@RequestBody ChanceTraceLog chance_trace_log) {
         RespBean respBean = null;
-        System.out.println(chance_trace_log);
+//        System.out.println(chance_trace_log);
         boolean sig = chanceTraceLogService.saveOrUpdate(chance_trace_log);
         if (!sig) {
             respBean = RespBean.ok(400, "create chance_log failure");
@@ -40,11 +42,11 @@ public class ChanceTraceLogController {
     }
 
     @GetMapping("/delete")
-    public RespBean deleteChanceTraceLog(@RequestParam String chance_num) {
+    public RespBean deleteChanceTraceLog(@RequestParam Integer id) {
         RespBean respBean = null;
-        QueryWrapper<ChanceTraceLog> qw = Wrappers.query();
-        qw.eq("chance_num", chance_num);
-        boolean sig = chanceTraceLogService.remove(qw);
+//        QueryWrapper<ChanceTraceLog> qw = Wrappers.query();
+//        qw.eq("chance_num", chance_num);
+        boolean sig = chanceTraceLogService.removeById(id);
         if (!sig) {
             respBean = RespBean.ok(400, "create chance_log failure", 2);
         } else {
@@ -60,8 +62,7 @@ public class ChanceTraceLogController {
         QueryWrapper<ChanceTraceLog> qw = Wrappers.query();
         qw.eq("chance_num", chance_num);
 
-        ChanceTraceLog chanceTraceLog = chanceTraceLogService.getOne(Wrappers.<ChanceTraceLog>lambdaQuery().eq(ChanceTraceLog::getChanceNum,chance_num));
-//        System.out.println(chanceTraceLog);
+        List<ChanceTraceLog> chanceTraceLog = chanceTraceLogService.list(qw);
         if (chanceTraceLog == null) {
             respBean = RespBean.ok(400, "create chance_log failure");
         } else {

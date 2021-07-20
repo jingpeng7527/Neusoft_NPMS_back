@@ -55,6 +55,7 @@ public class ChanceTraceLog implements Serializable {
     private String address;
 
     private String effect;
+
     @JsonProperty("communication_condition")
     private String communicationCondition;
 

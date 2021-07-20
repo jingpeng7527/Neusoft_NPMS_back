@@ -6,12 +6,14 @@ import com.example.client_management_provider_16000.dto.RespBean;
 import com.example.client_management_provider_16000.entity.ClientContact;
 import com.example.client_management_provider_16000.service.impl.ClientContactServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@CrossOrigin
 @RestController
+@EnableDiscoveryClient
 @RequestMapping("/client")
 public class ClientContactController {
     @Autowired

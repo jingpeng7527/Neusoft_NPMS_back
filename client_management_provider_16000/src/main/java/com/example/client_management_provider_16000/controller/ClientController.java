@@ -11,6 +11,7 @@ import com.example.client_management_provider_16000.entity.*;
 import com.example.client_management_provider_16000.service.impl.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -25,8 +26,9 @@ import java.util.List;
  * @author abigail
  * @since 2021-07-13
  */
-
+@CrossOrigin
 @RestController
+@EnableDiscoveryClient
 @RequestMapping("/client")
 public class ClientController {
     @Autowired

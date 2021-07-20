@@ -7,11 +7,8 @@ import com.example.client_management_provider_16000.dto.TransferLogWithChance;
 import com.example.client_management_provider_16000.entity.ClientTransferLog;
 import com.example.client_management_provider_16000.service.impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -25,7 +22,9 @@ import java.util.List;
  * @author abigail
  * @since 2021-07-18
  */
+@CrossOrigin
 @RestController
+@EnableDiscoveryClient
 @RequestMapping("/client")
 public class ClientTransferController {
 

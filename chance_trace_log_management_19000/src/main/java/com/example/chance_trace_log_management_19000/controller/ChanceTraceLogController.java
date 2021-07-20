@@ -7,6 +7,7 @@ import com.example.chance_trace_log_management_19000.dto.RespBean;
 import com.example.chance_trace_log_management_19000.entity.ChanceTraceLog;
 import com.example.chance_trace_log_management_19000.service.impl.ChanceTraceLogServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.web.bind.annotation.*;
 
 import javax.swing.text.ChangedCharSetException;
@@ -21,6 +22,7 @@ import java.util.List;
  * @since 2021-07-19
  */
 @CrossOrigin
+@EnableDiscoveryClient
 @RestController
 @RequestMapping("/chance/chance_trace_log")
 public class ChanceTraceLogController {

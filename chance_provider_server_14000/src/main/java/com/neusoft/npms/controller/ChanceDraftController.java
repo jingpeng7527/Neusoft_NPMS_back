@@ -255,14 +255,22 @@ public class ChanceDraftController {
             else return RespBean.error(500,"未知错误，快看库");
         } else if (isProcess.equals("2")) {
             return RespBean.error(403,"无权访问");
-        } else if (isProcess.equals("3")) {
+        } else if (isProcess.equals("3")) { // 修改审批
             updateChanceBaiscInfo = iChanceDraftService.update(Wrappers.<ChanceDraft>lambdaUpdate().eq(ChanceDraft::getChanceNum,chanceNum).set(ChanceDraft::getChanceStatusId,8));
-            updateSubChance = iSubChanceDraftService.update(Wrappers.<SubChanceDraft>lambdaUpdate().eq(SubChanceDraft::getChanceNum,chanceNum).set(SubChanceDraft::getSubChanceStatusId,5));
-            if (updateChanceBaiscInfo && updateSubChance)
-                return RespBean.ok(200,"提交成功");
+            iSubChanceDraftService.update(Wrappers.<SubChanceDraft>lambdaUpdate().eq(SubChanceDraft::getChanceNum,chanceNum).ne(SubChanceDraft::getSubChanceStatusId,3).set(SubChanceDraft::getSubChanceStatusId,5));
+            if (updateChanceBaiscInfo)
+                return RespBean.ok(200,"提交成功 其实少判断了subchance 最好看看库");
             else return RespBean.error(500,"未知错误，快看库");
-        } else
+        } else if (isProcess.equals("4")) { // 新增时的修改提交(总打回)
+            updateChanceBaiscInfo = iChanceDraftService.update(Wrappers.<ChanceDraft>lambdaUpdate().eq(ChanceDraft::getChanceNum,chanceNum).set(ChanceDraft::getChanceStatusId,7));
+            iSubChanceDraftService.update(Wrappers.<SubChanceDraft>lambdaUpdate().eq(SubChanceDraft::getChanceNum,chanceNum).ne(SubChanceDraft::getSubChanceStatusId,3).set(SubChanceDraft::getSubChanceStatusId,5));
+            if (updateChanceBaiscInfo ) {
+                return RespBean.ok(200,"提交成功 其实少判断了subchance 最好看看库");
+            } else return RespBean.ok(500,"新增-打回修改-提交 未知错误，改库");
+        } else {
             return RespBean.error(400,"非法参数");
+        }
+
 
 
     }

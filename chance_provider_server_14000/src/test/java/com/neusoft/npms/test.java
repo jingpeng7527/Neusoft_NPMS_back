@@ -198,7 +198,12 @@ public class test {
 
     @Test
     void test14() {
-        boolean updateSubChance = iSubChanceDraftService.update(Wrappers.<SubChanceDraft>lambdaUpdate().eq(SubChanceDraft::getChanceNum,"20210022").set(SubChanceDraft::getSubChanceStatusId,4));
+//        boolean updateSubChance = iSubChanceDraftService.update(Wrappers.<SubChanceDraft>lambdaUpdate().eq(SubChanceDraft::getChanceNum,"20210022").set(SubChanceDraft::getSubChanceStatusId,3));
+        boolean updateSubChance = iSubChanceDraftService.update(Wrappers.<SubChanceDraft>lambdaUpdate().eq(SubChanceDraft::getChanceNum,"20210022").ne(SubChanceDraft::getSubChanceStatusId,3).set(SubChanceDraft::getSubChanceStatusId,5));
+
         System.out.println(updateSubChance);
     }
+
+//    updateSubChance = iSubChanceDraftService.update(Wrappers.<SubChanceDraft>lambdaUpdate().eq(SubChanceDraft::getChanceNum,"20210022").ne(SubChanceDraft::getSubChanceStatusId,3).set(SubChanceDraft::getSubChanceStatusId,5));
+
 }

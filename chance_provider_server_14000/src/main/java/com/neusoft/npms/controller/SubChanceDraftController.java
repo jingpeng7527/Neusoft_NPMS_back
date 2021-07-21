@@ -43,7 +43,10 @@ public class SubChanceDraftController {
         }
 
         for (SubChanceDraft subChance:subChanceDraftList) {
-            subChance.setSubChanceStatusId(4);
+            if (subChance.getSubChanceStatusId()!=3){ // 关闭的时候不改变状态
+                subChance.setSubChanceStatusId(4);
+            }
+
             // 如果没有subChanceNum先生成
             if (subChance.getSubChanceNum() == null || subChance.getSubChanceNum().equals("")){
                 subChance.setSubChanceNum(iSubChanceDraftService.generateSubChanceNum(subChance.getChanceNum()));

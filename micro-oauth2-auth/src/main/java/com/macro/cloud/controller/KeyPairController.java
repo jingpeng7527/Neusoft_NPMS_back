@@ -3,6 +3,7 @@ package com.macro.cloud.controller;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,6 +15,7 @@ import java.util.Map;
  * 获取RSA公钥接口
  * Created by macro on 2020/6/19.
  */
+
 @RestController
 public class KeyPairController {
 

@@ -75,7 +75,7 @@ public class ChanceDraftServiceImpl extends ServiceImpl<ChanceDraftMapper, Chanc
             update(Wrappers.<ChanceDraft>lambdaUpdate().eq(ChanceDraft::getChanceNum,approveChanceDraft.getChanceNum())
                     .set(ChanceDraft::getChanceStatusId,7 ));
             iSubChanceDraftService.update(Wrappers.<SubChanceDraft>lambdaUpdate().eq(SubChanceDraft::getChanceNum,approveChanceDraft.getChanceNum())
-                    .set(SubChanceDraft::getSubChanceStatusId,5));
+                    .ne(SubChanceDraft::getSubChanceStatusId,3).set(SubChanceDraft::getSubChanceStatusId,5));
             return true;
 
         } else if (role == 3 || role == 4){ // 销售总监 事业部总经理（销售部二审）
@@ -91,7 +91,7 @@ public class ChanceDraftServiceImpl extends ServiceImpl<ChanceDraftMapper, Chanc
                 remove(Wrappers.<ChanceDraft>lambdaQuery().eq(ChanceDraft::getChanceNum,approveChanceDraft.getChanceNum()));
                 // 更新sub chance 状态
                 iSubChanceDraftService.update(Wrappers.<SubChanceDraft>lambdaUpdate().eq(SubChanceDraft::getChanceNum,approveChanceDraft.getChanceNum())
-                        .set(SubChanceDraft::getSubChanceStatusId,1));
+                        .ne(SubChanceDraft::getSubChanceStatusId,3).set(SubChanceDraft::getSubChanceStatusId,1));
                 // 更新sub chance real
                 List<SubChanceDraft> tmp = iSubChanceDraftService.list(Wrappers.<SubChanceDraft>lambdaQuery().eq(SubChanceDraft::getChanceNum,approveChanceDraft.getChanceNum()));
                 for (SubChanceDraft sub:tmp){
@@ -105,7 +105,7 @@ public class ChanceDraftServiceImpl extends ServiceImpl<ChanceDraftMapper, Chanc
             update(Wrappers.<ChanceDraft>lambdaUpdate().eq(ChanceDraft::getChanceNum,approveChanceDraft.getChanceNum())
                     .set(ChanceDraft::getChanceStatusId,1 ));
             iSubChanceDraftService.update(Wrappers.<SubChanceDraft>lambdaUpdate().eq(SubChanceDraft::getChanceNum,approveChanceDraft.getChanceNum())
-                    .set(SubChanceDraft::getSubChanceStatusId,1));
+                    .ne(SubChanceDraft::getSubChanceStatusId,3).set(SubChanceDraft::getSubChanceStatusId,1));
 
             // chance 导入real 表
             iChanceService.save(new Chance(getOne(Wrappers.<ChanceDraft>lambdaQuery().eq(ChanceDraft::getChanceNum,approveChanceDraft.getChanceNum()))));
@@ -136,9 +136,9 @@ public class ChanceDraftServiceImpl extends ServiceImpl<ChanceDraftMapper, Chanc
 
         } else if (role == 3 || role == 4) { // 销售总监 事业部总经理 驳回
             update(Wrappers.<ChanceDraft>lambdaUpdate().eq(ChanceDraft::getChanceNum,approveChanceDraft.getChanceNum())
-                    .set(ChanceDraft::getChanceStatusId,7 ));
+                    .set(ChanceDraft::getChanceStatusId,10 ));
             iSubChanceDraftService.update(Wrappers.<SubChanceDraft>lambdaUpdate().eq(SubChanceDraft::getChanceNum,approveChanceDraft.getChanceNum())
-                    .set(SubChanceDraft::getSubChanceStatusId,10));
+                    .set(SubChanceDraft::getSubChanceStatusId,5));
             return true;
         } else return false;
     }

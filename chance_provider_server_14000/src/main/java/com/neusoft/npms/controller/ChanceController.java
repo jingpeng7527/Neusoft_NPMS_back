@@ -50,6 +50,9 @@ public class ChanceController {
     @Autowired
     IChanceStageService iChanceStageService;
 
+    @Autowired
+    IClientService iclientService;
+
     @Cacheable(cacheNames = "getDepartments")
     @GetMapping("/get_departments")
     public RespBean getDepartments(String user_id, String role_id){
@@ -176,7 +179,6 @@ public class ChanceController {
                 chance.getBackground() == null || chance.getBackground().equals("") ||
                 chance.getUserId() == null || chance.getUserId() == 0 ||
                 chance.getClientId() == null || chance.getClientId() == 0 ||
-                chance.getClientName() == null || chance.getClientName().equals("") ||
                 chance.getCreateDate() == null){
             return RespBean.error(400,"非法参数");
         }
@@ -185,6 +187,9 @@ public class ChanceController {
 
         if (isHere == null)
             return RespBean.error(400,"非法参数");
+
+        String clientName = iclientService.getById(chance.getClientId()).getName();
+        iChanceService.update(Wrappers.<Chance>lambdaUpdate().eq(Chance::getChanceNum,chance.getChanceNum()).set(Chance::getClientName,clientName));
         iChanceService.update(chance,Wrappers.<Chance>lambdaUpdate().eq(Chance::getChanceNum,chance.getChanceNum()));
 
         return RespBean.ok(200,"更新成功");

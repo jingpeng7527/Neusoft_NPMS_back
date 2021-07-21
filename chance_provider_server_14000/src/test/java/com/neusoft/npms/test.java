@@ -195,4 +195,10 @@ public class test {
         ChanceDraft a = iChanceDraftService.getOne(Wrappers.<ChanceDraft>lambdaQuery().eq(ChanceDraft::getChanceNum,"112"));
         System.out.println(a);
     }
+
+    @Test
+    void test14() {
+        boolean updateSubChance = iSubChanceDraftService.update(Wrappers.<SubChanceDraft>lambdaUpdate().eq(SubChanceDraft::getChanceNum,"20210022").set(SubChanceDraft::getSubChanceStatusId,4));
+        System.out.println(updateSubChance);
+    }
 }

@@ -16,6 +16,11 @@ spring:
     port: 6666
     host: 39.106.82.211
     password: 8461e2c92b2848975c058cb4fbba735f
+  datasource:
+    url: jdbc:mysql://47.98.166.180:3306/npms?characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
 management:
   endpoints:
     web:

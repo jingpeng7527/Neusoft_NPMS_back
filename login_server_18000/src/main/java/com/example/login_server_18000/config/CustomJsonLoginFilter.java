@@ -71,6 +71,7 @@ public class CustomJsonLoginFilter extends AbstractAuthenticationProcessingFilte
 
             throw new UsernameNotFoundException("username wrong");
         }
+//        EncryptionAlgorithm.ENCODER_MAP.get("bcrypt").encode();
         if(!EncryptionAlgorithm.ENCODER_MAP.get("bcrypt").matches(password, u.getPassword())){
 
             throw new AuthenticationServiceException("password wrong");

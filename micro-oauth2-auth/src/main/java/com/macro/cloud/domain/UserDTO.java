@@ -19,6 +19,14 @@ public class UserDTO{
     private Integer status;
     private List<String> roles;
 
+//    public UserDTO(Long id, String username, String password, Integer status, List<String> roles) {
+//        this.id = id;
+//        this.username = username;
+//        this.password = password;
+//        this.status = status;
+//        this.roles = roles;
+//    }
+
     public Long getId() {
         return id;
     }
@@ -57,5 +65,16 @@ public class UserDTO{
 
     public void setRoles(List<String> roles) {
         this.roles = roles;
+    }
+
+    @Override
+    public String toString() {
+        return "UserDTO{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", status=" + status +
+                ", roles=" + roles +
+                '}';
     }
 }

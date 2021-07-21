@@ -252,7 +252,7 @@ public class ChanceDraftController {
             updateSubChance = iSubChanceDraftService.update(Wrappers.<SubChanceDraft>lambdaUpdate().eq(SubChanceDraft::getChanceNum,chanceNum).set(SubChanceDraft::getSubChanceStatusId,5));
             if (updateChanceBaiscInfo && updateSubChance)
                 return RespBean.ok(200,"提交成功");
-            else return RespBean.error(500,"未知错误，快库");
+            else return RespBean.error(500,"未知错误，快看库");
         } else if (isProcess.equals("2")) {
             return RespBean.error(403,"无权访问");
         } else if (isProcess.equals("3")) {
@@ -260,7 +260,7 @@ public class ChanceDraftController {
             updateSubChance = iSubChanceDraftService.update(Wrappers.<SubChanceDraft>lambdaUpdate().eq(SubChanceDraft::getChanceNum,chanceNum).set(SubChanceDraft::getSubChanceStatusId,5));
             if (updateChanceBaiscInfo && updateSubChance)
                 return RespBean.ok(200,"提交成功");
-            else return RespBean.error(500,"未知错误，快库");
+            else return RespBean.error(500,"未知错误，快看库");
         } else
             return RespBean.error(400,"非法参数");
 

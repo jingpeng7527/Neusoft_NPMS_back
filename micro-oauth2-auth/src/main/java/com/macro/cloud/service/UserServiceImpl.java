@@ -2,6 +2,7 @@ package com.macro.cloud.service;
 
 import cn.hutool.core.collection.CollUtil;
 import com.macro.cloud.domain.SecurityUser;
+import com.macro.cloud.domain.User;
 import com.macro.cloud.domain.UserDTO;
 import com.macro.cloud.constant.MessageConstant;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.security.authentication.LockedException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -27,16 +29,38 @@ import java.util.stream.Collectors;
 @Service
 public class UserServiceImpl implements UserDetailsService {
 
-    private List<UserDTO> userList;
+    private List<UserDTO> userList = new ArrayList<>();
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private IUserService iUserService;
+
     @PostConstruct
     public void initData() {
-        String password = passwordEncoder.encode("123456");
-        userList = new ArrayList<>();
-        userList.add(new UserDTO(1L,"macro", password,1, CollUtil.toList("ADMIN")));
-        userList.add(new UserDTO(2L,"andy", password,1, CollUtil.toList("TEST")));
+
+//        List<UserDTO> userList = new ArrayList<>();
+        for (User user:iUserService.list()) {
+            long id = user.getId();
+            String name = user.getUsername();
+            String password = user.getPassword();
+//            System.out.println("pppppp " + password);
+//            String password = passwordEncoder.encode(user.getPassword());
+            String roleId = String.valueOf(user.getRoleId());
+            userList.add(new UserDTO(id,name,password,1,CollUtil.toList(roleId)));
+
+        }
+//        userList.add(new UserDTO(10L,"macro", passwordEncoder.encode("123456"),1, CollUtil.toList("1")));
+
+//        for (UserDTO u:userList) {
+//            System.out.println(u);
+//        }
+//        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+//        String password = bCryptPasswordEncoder.encode("123456");
+
+
+//        userList.add(new UserDTO(1L,"macro", password,1, CollUtil.toList("ADMIN")));
+//        userList.add(new UserDTO(2L,"andy", password,1, CollUtil.toList("TEST")));
     }
 
     @Override

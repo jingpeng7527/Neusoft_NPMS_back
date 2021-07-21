@@ -26,6 +26,8 @@ public class LoginUserHolder {
         userDTO.setUsername(userJsonObject.getStr("user_name"));
         userDTO.setId(Convert.toLong(userJsonObject.get("id")));
         userDTO.setRoles(Convert.toList(String.class,userJsonObject.get("authorities")));
+
+
         return userDTO;
     }
 }

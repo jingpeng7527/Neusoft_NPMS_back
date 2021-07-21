@@ -2,6 +2,11 @@ server:
   port: 18000
 
 spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 8.140.46.173:8848
+
   datasource:
     url: jdbc:mysql://47.98.166.180:3306/npms?characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
     username: root

@@ -39,8 +39,8 @@ spring:
             allowedMethods: "*"
             # 允许跨域请求里的head字段，设置*为全部
             allowedHeaders: "*"
-#      default-filters:
-#        - DedupeResponseHeader=Access-Control-Allow-Origin, RETAIN_UNIQUE
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Origin, RETAIN_UNIQUE
 
   security:
     oauth2:

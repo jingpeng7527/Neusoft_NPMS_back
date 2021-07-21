@@ -69,43 +69,63 @@ public class ClientController {
         //登录
         //relate详情////
 
-        if (client.getId() == null) {
-            client.setCreateTime(LocalDateTime.now());
-
-            List<Client> clientList = clientService.list();
-            String clientNum = clientList.get(clientList.size() - 1).getClientNum();
-            int num = Integer.parseInt(clientNum) + 1;
-
-            client.setClientNum(Integer.toString(num));
-        }
-
-        boolean sig = clientService.saveOrUpdate(client);
+//        if (client.getId() == null) {
         RespBean respBean = null;
-        if (sig) {
-            respBean = RespBean.ok(200, "add successfully ", client);
-        } else {
-            respBean = RespBean.ok(400, "add failure");
-        }
+        Client client1 = clientService.getOne(Wrappers.<Client>lambdaQuery().eq(Client::getName,client.getName()));
+//        System.out.println("client1"+client1);
+        Client client2 = clientService.getOne(Wrappers.<Client>lambdaQuery().eq(Client::getTaxpayerCode,client.getTaxpayerCode()));
+//        System.out.println("client2"+client2);
+            if (client1!=null){
+                respBean = RespBean.ok(401,"客户姓名重复");
+            }else if (client2!=null){
+                respBean = RespBean.ok(402,"纳税人编号重复");
+            }else {
+                client.setCreateTime(LocalDateTime.now());
+
+                List<Client> clientList = clientService.list();
+                String clientNum = clientList.get(clientList.size() - 1).getClientNum();
+                int num = Integer.parseInt(clientNum) + 1;
+
+                client.setClientNum(Integer.toString(num));
+//        }
+
+                boolean sig = clientService.saveOrUpdate(client);
+
+                if (sig) {
+                    respBean = RespBean.ok(200, "add successfully ", client);
+                } else {
+                    respBean = RespBean.ok(400, "add failure");
+                }
+            }
         return respBean;
     }
 
     @PostMapping("modify_client")
     public RespBean modifyClient(@RequestBody Client client) {
-        boolean sig = clientService.updateById(client);
-
-        Integer flag1 = clientService.updateClientInChance(client);
-
-        Integer flag2 = clientService.updateClientInChanceDraft(client);
-
         RespBean respBean = null;
-        if (!sig) {
-            respBean = RespBean.ok(400, "update client failure");
+        Client client1 = clientService.getOne(Wrappers.<Client>lambdaQuery().eq(Client::getName,client.getName()));
+//        System.out.println("client111"+client1);
+        Client client2 = clientService.getOne(Wrappers.<Client>lambdaQuery().eq(Client::getTaxpayerCode,client.getTaxpayerCode()));
+//        System.out.println("client222"+client2);
+        if (client1!=null&&client1.getId()!=client.getId()){
+            respBean = RespBean.ok(401,"客户姓名重复");
+        }else if (client2!=null&&client2.getId()!=client.getId()){
+            respBean = RespBean.ok(402,"纳税人编号重复");
+        }else {
+            boolean sig = clientService.updateById(client);
+
+            Integer flag1 = clientService.updateClientInChance(client);
+
+            Integer flag2 = clientService.updateClientInChanceDraft(client);
+            if (!sig) {
+                respBean = RespBean.ok(400, "update client failure");
 //        } else if (flag1==0) {
 //            respBean = RespBean.ok(401, "update clientInChance failure or no chance for this client ");
 //        } else if (flag2==0) {
 //            respBean = RespBean.ok(402, "update clientInChanceDraft failure or no chanceDraft for this client");
-        } else {
-            respBean = RespBean.ok(200, "update successfully ", clientService.getById(client.getId()));
+            } else {
+                respBean = RespBean.ok(200, "update successfully ", clientService.getById(client.getId()));
+            }
         }
         return respBean;
     }

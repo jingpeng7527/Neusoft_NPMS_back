@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -59,6 +60,25 @@ public class ChanceTypeProductController {
         List<ChanceTypeProduct> result = iChanceTypeProductService.
                 list(Wrappers.<ChanceTypeProduct>lambdaQuery().eq(ChanceTypeProduct::getProductNum,product_num));
         return RespBean.ok(200,"通过productNum获取chanceType",result);
+    }
+
+    @Cacheable(cacheNames = "getIdByChanceTypeAndProductNum")
+    @GetMapping("/get_id_by_chance_type_and_product_num")
+    public RespBean getIdByChanceTypeAndProductNum(String chanceTypeNum, String productNum) {
+        System.out.println("/get_id_by_chance_type_and_product_num");
+        System.out.println("chanceTypeNum: "+chanceTypeNum + "productNum: "+productNum);
+        System.out.println();
+        if (chanceTypeNum == null || chanceTypeNum.equals("") || productNum == null || productNum.equals("")) {
+            return RespBean.error(400,"非法参数");
+        }
+
+        ChanceTypeProduct chanceTypeProduct = iChanceTypeProductService.getOne(Wrappers.<ChanceTypeProduct>lambdaQuery()
+                .eq(ChanceTypeProduct::getChanceTypeNum,chanceTypeNum)
+                .eq(ChanceTypeProduct::getProductNum,productNum));
+        if (chanceTypeProduct == null) {
+            return RespBean.error(400,"参数错误");
+        } else
+            return RespBean.ok(200,"chance_type_and_product_id",chanceTypeProduct.getId());
     }
 
 }

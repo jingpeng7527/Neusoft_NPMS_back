@@ -51,12 +51,12 @@ public class ReturnChanceApproveLog implements Serializable {
     public ReturnChanceApproveLog (ChanceApproveLog chanceApproveLog, IOpinionTypeService iOpinionTypeService, IUserService iUserService) {
         this.id = chanceApproveLog.getId();
         this.opinionTypeId = chanceApproveLog.getOpinionTypeId();
-        this.opinion = iOpinionTypeService.getById(chanceApproveLog.getId()).getName();
+        this.opinion = iOpinionTypeService.getById(chanceApproveLog.getOpinionTypeId()).getName();
         this.content = chanceApproveLog.getContent();
         this.chanceNum = chanceApproveLog.getChanceNum();
         this.approveTime = chanceApproveLog.getApproveTime();
         this.userId = chanceApproveLog.getUserId();
-        this.userName = iUserService.getById(chanceApproveLog.getId()).getUsername();
+        this.userName = iUserService.getById(chanceApproveLog.getUserId()).getUsername();
         this.name = chanceApproveLog.getName();
         this.chanceApproveState = chanceApproveLog.getChanceApproveState();
     }

@@ -47,6 +47,8 @@ public class ChanceDraftController {
     ISubChanceDraftService iSubChanceDraftService;
     @Autowired
     IChanceTypeProductService iChanceTypeProductService;
+    @Autowired
+    IChanceService iChanceService;
 
     @PostMapping("/save_chance_in_draft")
     public RespBean saveChance (@RequestBody Chance chance){
@@ -92,7 +94,7 @@ public class ChanceDraftController {
         if (roleId == 2) {// 营销副总 (初审)
             List<ReturnChanceBasicInfo> returnList = new ArrayList<>();
 
-            List<ChanceDraft> result = iChanceDraftService.list(Wrappers.<ChanceDraft>lambdaQuery().eq(ChanceDraft::getChanceStatusId,6).or().eq(ChanceDraft::getChanceStatusId,9));
+            List<ChanceDraft> result = iChanceDraftService.list(Wrappers.<ChanceDraft>lambdaQuery().eq(ChanceDraft::getChanceStatusId,6));
             for (ChanceDraft c:result)
                 returnList.add(new ReturnChanceBasicInfo(c,iChanceSourceService,iChanceStageService,iDeptService ,iUserService,iChanceStatusService));
             return RespBean.ok(200,"初审机会列表",returnList);
@@ -101,7 +103,7 @@ public class ChanceDraftController {
             List<ReturnChanceBasicInfo> returnList = new ArrayList<>();
 
             List<ChanceDraft> result = iChanceDraftService.list(Wrappers.<ChanceDraft>lambdaQuery()
-                    .lt(ChanceDraft::getDeptId,9).and(w->w.eq(ChanceDraft::getChanceStatusId,7).or().eq(ChanceDraft::getChanceStatusId,10).or().eq(ChanceDraft::getChanceStatusId,8)));
+                    .lt(ChanceDraft::getDeptId,9).and(w->w.eq(ChanceDraft::getChanceStatusId,7).or().or().eq(ChanceDraft::getChanceStatusId,8)));
             for (ChanceDraft c:result)
                 returnList.add(new ReturnChanceBasicInfo(c,iChanceSourceService,iChanceStageService,iDeptService ,iUserService,iChanceStatusService));
             return RespBean.ok(200,"销售部二审列表",returnList);
@@ -110,7 +112,7 @@ public class ChanceDraftController {
             List<ReturnChanceBasicInfo> returnList = new ArrayList<>();
 
             List<ChanceDraft> result = iChanceDraftService.list(Wrappers.<ChanceDraft>lambdaQuery()
-                    .gt(ChanceDraft::getDeptId,8).and(w->w.eq(ChanceDraft::getChanceStatusId,7).or().eq(ChanceDraft::getChanceStatusId,10).or().eq(ChanceDraft::getChanceStatusId,8)));
+                    .gt(ChanceDraft::getDeptId,8).and(w->w.eq(ChanceDraft::getChanceStatusId,7).or().or().eq(ChanceDraft::getChanceStatusId,8)));
             for (ChanceDraft c:result)
                 returnList.add(new ReturnChanceBasicInfo(c,iChanceSourceService,iChanceStageService,iDeptService ,iUserService,iChanceStatusService));
             return RespBean.ok(200,"事业部二审列表",returnList);
@@ -153,7 +155,7 @@ public class ChanceDraftController {
         return RespBean.ok(200,"获取待审批的机会下的所有子机会", returnList);
     }
 
-    @GetMapping("/approve_chance_draft_by_chance_num")
+    @PostMapping("/approve_chance_draft_by_chance_num")
     public RespBean approveChanceDraftByChanceNum(@RequestBody ApproveChanceDraft approveChanceDraft){
         System.out.println("/approve_chance_draft_by_chance_num");
         System.out.println("approveChanceDraft: "+ approveChanceDraft);
@@ -166,7 +168,7 @@ public class ChanceDraftController {
                 approveChanceDraft.getOpinionTypeId() == null || approveChanceDraft.getOpinionTypeId().equals("") ||
                 approveChanceDraft.getUserId() == null || approveChanceDraft.getUserId().equals(""))
             return RespBean.error(400, "非法参数1");
-        if (approveChanceDraft.getOpinionTypeId().equals("2") || approveChanceDraft.getOpinionTypeId().equals(3)) {
+        if (approveChanceDraft.getOpinionTypeId().equals("2") || approveChanceDraft.getOpinionTypeId().equals("3")) {
             if (approveChanceDraft.getContent() == null || approveChanceDraft.getContent().equals(""))
                 return RespBean.error(400, "非法参数2");
         }
@@ -174,50 +176,50 @@ public class ChanceDraftController {
         // 权限管理
         int role  = iUserService.getById(approveChanceDraft.getUserId()).getRoleId();
         if (role == 2) { // 营销副总 (初审)
-            if (approveChanceDraft.getOpinionTypeId() == "1") { // 通过
+            if (approveChanceDraft.getOpinionTypeId().equals("1")) { // 通过
                 returnState = iChanceDraftService.approve(approveChanceDraft,role);
                 if (returnState) return RespBean.ok(200,"营销副总审批通过");
                 else return RespBean.error(500,"发生未知错误或参数错误——营销副总审批通过");
 
-            } else if (approveChanceDraft.getOpinionTypeId() == "2") { // 打回
+            } else if (approveChanceDraft.getOpinionTypeId().equals("2")) { // 打回
                 returnState = iChanceDraftService.back(approveChanceDraft,role);
                 if (returnState) return RespBean.ok(200, "营销副总驳回");
                 else return RespBean.error(500,"发生未知错误或参数错误——营销副总驳回");
 
-            } else if (approveChanceDraft.getOpinionTypeId() == "3") { // 关闭
+            } else if (approveChanceDraft.getOpinionTypeId().equals("3")) { // 关闭
                 returnState = iChanceDraftService.close(approveChanceDraft,role);
                 if (returnState) return RespBean.ok(200, "营销副总审批拒绝（关闭）");
                 else return RespBean.error(500, "发生未知错误或参数错误——营销副总审批拒绝（关闭）");
             } else
                 return RespBean.error(400,"非法参数3");
         } else if (role == 3) { // 销售总监 （销售部二审）
-            if (approveChanceDraft.getOpinionTypeId() == "1") {
+            if (approveChanceDraft.getOpinionTypeId().equals("1")) {
                 returnState = iChanceDraftService.approve(approveChanceDraft,role);
                 if (returnState) return RespBean.ok(200,"销售总监审批通过");
                 else return RespBean.error(500,"发生未知错误或参数错误——销售总监审批通过");
-            } else if (approveChanceDraft.getOpinionTypeId() == "2") {
+            } else if (approveChanceDraft.getOpinionTypeId().equals("2")) {
                 returnState = iChanceDraftService.back(approveChanceDraft,role);
                 if (returnState) return RespBean.ok(200, "销售总监驳回");
                 else return RespBean.error(500,"发生未知错误或参数错误——销售总监驳回");
 
-            } else if (approveChanceDraft.getOpinionTypeId() == "3") {
+            } else if (approveChanceDraft.getOpinionTypeId().equals("3")) {
                 returnState = iChanceDraftService.close(approveChanceDraft,role);
                 if (returnState) return RespBean.ok(200,"销售总监审批拒绝（关闭）");
                 return RespBean.ok(500, "发生未知错误或参数错误——销售总监审批拒绝（关闭）");
             } else
                 return RespBean.error(400,"非法参数4");
         } else if (role == 4) { // 事业部总经理 （事业部二审）
-            if (approveChanceDraft.getOpinionTypeId() == "1") {
+            if (approveChanceDraft.getOpinionTypeId().equals("1")) {
                 returnState = iChanceDraftService.approve(approveChanceDraft, role);
                 if (returnState) return RespBean.ok(200,"事业部总经理审批通过");
                 else return RespBean.error(500, "发生未知错误或参数错误——事业部总经理审批通过");
 
-            } else if (approveChanceDraft.getOpinionTypeId() == "2") {
+            } else if (approveChanceDraft.getOpinionTypeId().equals("2")) {
                 returnState = iChanceDraftService.back(approveChanceDraft,role);
                 if (returnState) return RespBean.ok(200, "事业部总经理驳回");
                 else return RespBean.error(500,"发生未知错误或参数错误——事业部总经理驳回");
 
-            } else if (approveChanceDraft.getOpinionTypeId() == "3") {
+            } else if (approveChanceDraft.getOpinionTypeId().equals("3")) {
                 returnState = iChanceDraftService.close(approveChanceDraft,role);
                 if (returnState) return RespBean.ok(200, "事业部总经理拒绝（关闭）");
                 else return RespBean.error(500, "发生未知错误或参数错误——事业部总经理拒绝（关闭）");
@@ -240,6 +242,9 @@ public class ChanceDraftController {
 
         boolean updateChanceBaiscInfo;
         boolean updateSubChance;
+
+        // 草稿表中没有 是修改触发的审批
+        ChanceDraft tmp1 = iChanceDraftService.getOne(Wrappers.<ChanceDraft>lambdaQuery().eq(ChanceDraft::getChanceNum,chanceNum));
 
         if (isProcess.equals("1")) {
             // 修改机会基本信息的状态为 新增流程中 6

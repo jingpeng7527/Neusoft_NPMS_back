@@ -13,7 +13,9 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * <p>
@@ -113,12 +115,19 @@ public class ChanceController {
                 System.out.println("无参数+draft");
                 resultListDraft = iChanceDraftService.getChanceByCondition(chanceQueryCondition);
             }
-            for (Chance chance:resultList) {
-                resultListDraft.add(new ChanceDraft(chance));
-            }
+            // 去重
+            Set<String> set = new HashSet<>();
             for (ChanceDraft draft:resultListDraft) {
                 returnList.add(new ReturnChanceBasicInfo(draft,iChanceSourceService,iChanceStageService,iDeptService,iUserService,iChanceStatusService));
+                set.add(draft.getChanceNum());
             }
+
+            for (Chance chance:resultList) {
+                if (set.contains(chance.getChanceNum()))
+                    continue;
+                returnList.add(new ReturnChanceBasicInfo(chance,iChanceSourceService,iChanceStageService,iDeptService,iUserService,iChanceStatusService));
+            }
+
             return RespBean.ok(200,"根据搜索条件获取chance + draft的list",returnList);
         }
     }

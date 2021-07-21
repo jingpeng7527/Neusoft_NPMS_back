@@ -136,9 +136,9 @@ public class ChanceDraftServiceImpl extends ServiceImpl<ChanceDraftMapper, Chanc
 
         } else if (role == 3 || role == 4) { // 销售总监 事业部总经理 驳回
             update(Wrappers.<ChanceDraft>lambdaUpdate().eq(ChanceDraft::getChanceNum,approveChanceDraft.getChanceNum())
-                    .set(ChanceDraft::getChanceStatusId,10 ));
+                    .set(ChanceDraft::getChanceStatusId,7 ));
             iSubChanceDraftService.update(Wrappers.<SubChanceDraft>lambdaUpdate().eq(SubChanceDraft::getChanceNum,approveChanceDraft.getChanceNum())
-                    .set(SubChanceDraft::getSubChanceStatusId,5));
+                    .set(SubChanceDraft::getSubChanceStatusId,10));
             return true;
         } else return false;
     }

@@ -27,7 +27,7 @@
         <hutool-version>5.3.5</hutool-version>
         <springboot.version>2.3.3.RELEASE</springboot.version>
         <springcloud.version>Hoxton.SR9</springcloud.version>
-<!--        <nacos.version>0.2.2.RELEASE</nacos.version>-->
+        <nacos.version>0.2.2.RELEASE</nacos.version>
 
     </properties>
 
@@ -103,13 +103,13 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-<!--            <dependency>-->
-<!--                <groupId>org.springframework.cloud</groupId>-->
-<!--                <artifactId>spring-cloud-alibaba-dependencies</artifactId>-->
-<!--                <version>${nacos.version}</version>-->
-<!--                <type>pom</type>-->
-<!--                <scope>import</scope>-->
-<!--            </dependency>-->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${nacos.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

@@ -103,7 +103,7 @@ public class ChanceDraftController {
             List<ReturnChanceBasicInfo> returnList = new ArrayList<>();
 
             List<ChanceDraft> result = iChanceDraftService.list(Wrappers.<ChanceDraft>lambdaQuery()
-                    .lt(ChanceDraft::getDeptId,9).and(w->w.eq(ChanceDraft::getChanceStatusId,7).or().or().eq(ChanceDraft::getChanceStatusId,8)));
+                    .lt(ChanceDraft::getDeptId,9).and(w->w.eq(ChanceDraft::getChanceStatusId,7).or().eq(ChanceDraft::getChanceStatusId,8)));
             for (ChanceDraft c:result)
                 returnList.add(new ReturnChanceBasicInfo(c,iChanceSourceService,iChanceStageService,iDeptService ,iUserService,iChanceStatusService));
             return RespBean.ok(200,"销售部二审列表",returnList);

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="micro-oauth2-api" />
+        <module name="eureka_server_15000" />
+        <module name="client_management_consumer_17000" />
+        <module name="micro-oauth2-auth" />
+        <module name="sales_log_provider_server_12000" />
+        <module name="chance_trace_log_management_19000" />
+        <module name="client_management_provider_16000" />
+        <module name="chance_provider_server_14000" />
+        <module name="micro-oauth2-gateway" />
+        <module name="login_server_18000" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="chance_consumer_server_13000" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

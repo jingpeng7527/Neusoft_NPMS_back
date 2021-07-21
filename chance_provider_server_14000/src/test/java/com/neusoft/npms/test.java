@@ -10,6 +10,7 @@ import com.neusoft.npms.service.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.RedisTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +53,9 @@ public class test {
 
     @Autowired
     ISubChanceService iSubChanceService;
+
+    @Autowired
+    RedisTemplate redisTemplate;
 
     @Test
     public void test1(){
@@ -186,5 +190,9 @@ public class test {
         iSubChanceDraftService.remove(Wrappers.<SubChanceDraft>lambdaQuery().eq(SubChanceDraft::getChanceNum,"20210005"));
     }
 
-
+    @Test
+    void test13() {
+        ChanceDraft a = iChanceDraftService.getOne(Wrappers.<ChanceDraft>lambdaQuery().eq(ChanceDraft::getChanceNum,"112"));
+        System.out.println(a);
+    }
 }

@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
  * 获取登录用户信息接口
  * Created by macro on 2020/6/19.
  */
-//@CrossOrigin
+@CrossOrigin
 @RestController
 @RequestMapping("/user")
 public class UserController{

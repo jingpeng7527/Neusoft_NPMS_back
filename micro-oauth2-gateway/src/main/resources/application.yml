@@ -23,6 +23,32 @@ spring:
             - Path=/auth/**
           filters:
             - StripPrefix=1
+
+        - id: chance_provider_server_14000
+          uri: lb://chance-provider-server
+          predicates:
+            - Path=/chance/**
+          filters:
+            - StripPrefix=1
+        - id: chance_trace_log_management_19000
+          uri: lb://nacos-chance-trace-log-service
+          predicates:
+            - Path=/chance_trace_log/**
+          filters:
+            - StripPrefix=1
+        - id: client_management_provider_16000
+          uri: lb://nacos-client-management-service
+          predicates:
+            - Path=/client/**
+          filters:
+            - StripPrefix=1
+        - id: sales_log_provider_server_12000
+          uri: lb://sales-log-provider-server
+          predicates:
+            - Path=/sales/**
+          filters:
+            - StripPrefix=1
+
       discovery:
         locator:
           enabled: true #开启从注册中心动态创建路由的功能
@@ -57,3 +83,4 @@ secure:
     urls: #配置白名单路径
       - "/actuator/**"
       - "/auth/oauth/token"
+#      - "/api/**"

@@ -29,3 +29,8 @@ spring:
 logging:
   level:
     com.example : DEBUG
+
+springfox:
+  documentation:
+    swagger-ui:
+      enabled: true

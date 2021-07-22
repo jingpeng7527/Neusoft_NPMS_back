@@ -12,6 +12,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +22,7 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.List;
 
+//@CrossOrigin
 @Component
 public class MyAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
     IUserService iUserService;

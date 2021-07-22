@@ -10,6 +10,7 @@ import com.example.client_management_provider_16000.entity.*;
 
 import com.example.client_management_provider_16000.service.impl.*;
 
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.web.bind.annotation.*;
@@ -30,6 +31,7 @@ import java.util.List;
 @RestController
 @EnableDiscoveryClient
 @RequestMapping("/client")
+@Api(tags = "client")
 public class ClientController {
     @Autowired
     ClientServiceImpl clientService;

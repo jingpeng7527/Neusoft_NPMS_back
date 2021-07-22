@@ -13,6 +13,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import javax.management.relation.Role;
 import javax.servlet.ServletException;
@@ -23,6 +24,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+//@CrossOrigin
 public class CustomJsonLoginFilter extends AbstractAuthenticationProcessingFilter {
     private IUserService iUserService;
 

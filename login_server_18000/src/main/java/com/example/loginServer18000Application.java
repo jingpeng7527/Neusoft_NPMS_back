@@ -3,10 +3,12 @@ package com.example;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 @SpringBootApplication
-@CrossOrigin
+//@CrossOrigin
+@EnableDiscoveryClient
 @MapperScan("com.example.login_server_18000.mapper")
 public class loginServer18000Application {
 

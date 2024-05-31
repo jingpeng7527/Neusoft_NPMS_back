@@ -2,6 +2,9 @@
 
 NPMS (Neusoft Profit Management System) is a comprehensive solution that facilitates end-to-end project management, enabling the tracking of sales opportunities, maintenance of customer information, and efficient monitoring of project plans, costs, and progress.
 
+![image](https://github.com/jingpeng7527/Neusoft_NPMS_back/assets/114365503/f7d992a5-0303-4ad6-a2b8-b8cfb327e169)
+
+
 > [!NOTE]
 > This is the back-end code for NPMS by Vue.js
 

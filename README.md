@@ -11,8 +11,8 @@ NPMS (Neusoft Profit Management System) is a comprehensive solution that facilit
 - Our project uses MySQL database, based on distributed microservices development architecture, front-end discover service through gateway, by oauth2 for permission verification. 
 - The front-end and back-end are separated, and the back-end is separated from the controller, service and mapper layers. 
 - Data is design to VO and PO.
-
-Here is the report link: https://docs.google.com/document/d/1Dk7BO98VCzDQon8uYApZlOEd6bsuBXG3/edit?usp=sharing&ouid=101884265629727065347&rtpof=true&sd=true
+  
+<!--- Here is the report link: https://docs.google.com/document/d/1Dk7BO98VCzDQon8uYApZlOEd6bsuBXG3/edit?usp=sharing&ouid=101884265629727065347&rtpof=true&sd=true --->
 
 ## Relevant Technologies![image](https://github.com/jingpeng7527/Neusoft_NPMS_back/assets/114365503/d55e2347-76d0-47db-9240-4d5517267cc0)
 <img width="415" alt="image" src="https://github.com/jingpeng7527/Neusoft_NPMS_back/assets/114365503/42502f30-3176-41b6-b4fe-c2b75c571798">

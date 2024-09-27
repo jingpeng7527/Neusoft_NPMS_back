@@ -6,7 +6,7 @@ NPMS (Neusoft Profit Management System) is a comprehensive solution that facilit
 
 
 > [!NOTE]
-> This is the back-end code for NPMS by Vue.js
+> This is the back-end code for NPMS by SpringBoot, Mybatis-Plus
 
 - Our project uses MySQL database, based on distributed microservices development architecture, front-end discover service through gateway, by oauth2 for permission verification. 
 - The front-end and back-end are separated, and the back-end is separated from the controller, service and mapper layers. 
